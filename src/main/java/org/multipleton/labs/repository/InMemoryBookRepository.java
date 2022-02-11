@@ -7,15 +7,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class InMemoryBookRepository implements BookRepository {
     private final Set<Book> books = new HashSet<>();
+    private final AtomicLong lastIndex = new AtomicLong(0);
 
     @Override
-    public List<Book> findBooksByAuthor(Long id) {
+    public List<Book> findBooksByAuthorName(String name) {
         return books.stream()
-                .filter(b -> b.isAuthor(id))
+                .filter(b -> b.getAuthor().getName().equals(name))
                 .toList();
     }
 
@@ -34,7 +36,17 @@ public class InMemoryBookRepository implements BookRepository {
     }
 
     @Override
+    public Optional<Book> findById(Long id) {
+        return books.stream()
+                .filter(b -> b.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
     public Book save(Book book) {
+        if (book.getId() == null) {
+            book.setId(lastIndex.incrementAndGet());
+        }
         books.remove(book);
         books.add(book);
         return book;

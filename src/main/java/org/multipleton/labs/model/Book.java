@@ -9,7 +9,7 @@ import static java.util.Optional.ofNullable;
 
 public class Book {
 
-    private final Set<String> tags;
+    private Set<String> tags;
     private Long id;
     private String title;
     private Author author;
@@ -45,17 +45,17 @@ public class Book {
         this.author = author;
     }
 
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
     public Set<String> getTags() {
         return tags;
     }
 
-    public boolean isAuthor(Long id) {
-        return author.getId().equals(id);
-    }
-
     public boolean hasAnyTag(List<String> tags) {
         for (String tag : tags) {
-            if (tags.contains(tag)) {
+            if (this.tags.contains(tag)) {
                 return true;
             }
         }

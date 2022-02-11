@@ -2,6 +2,7 @@ package org.multipleton.labs.service;
 
 import org.multipleton.labs.dto.BookDto;
 import org.multipleton.labs.model.Book;
+import org.multipleton.labs.repository.AuthorRepository;
 import org.multipleton.labs.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,15 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
-    public List<Book> findBooksByAuthor(Long id) {
-        // todo check author exists
-        return bookRepository.findBooksByAuthor(id);
+    public List<Book> findBooksByAuthor(String name) {
+        return bookRepository.findBooksByAuthorName(name);
     }
 
     public Book findBookByTitle(String title) {
@@ -30,18 +32,22 @@ public class BookService {
         return bookRepository.findBooksByTags(tags);
     }
 
-    public Book createBook(BookDto bookDto) {
-        // todo
-        return null;
+    public Book createBook(BookDto dto) {
+        var author = authorRepository.findById(dto.getAuthorId())
+                .orElseThrow(() -> new IllegalArgumentException("Author not found: " + dto.getAuthorId()));
+        var book = new Book(null, dto.getTitle(), dto.getTags(), author);
+        return bookRepository.save(book);
     }
 
     public void deleteBook(Long bookId) {
-        // todo
-
+        bookRepository.deleteById(bookId);
     }
 
-    public void updateBook(Book book) {
-        // todo
-
+    public void updateBook(BookDto dto) {
+        var book = bookRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Book not found: " + dto.getId()));
+        book.setTitle(dto.getTitle());
+        book.setTags(dto.getTags());
+        bookRepository.save(book);
     }
 }
