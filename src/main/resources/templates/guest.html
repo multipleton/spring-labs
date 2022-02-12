@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Guest</h1>
+<form th:action="@{books/author}" method="get">
+    <label>
+        Find books by author
+        <input th:name="author" name="author"/>
+    </label>
+    <button type="submit">Send</button>
+</form>
+<form th:action="@{books/title}" method="get">
+    <label>
+        Find books by title
+        <input th:name="title" name="title"/>
+    </label>
+    <button type="submit">Send</button>
+</form>
+<form th:action="@{books/tags}" method="get">
+    <label>
+        Find books by tags
+        <input th:name="tags" name="tags"/>
+    </label>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

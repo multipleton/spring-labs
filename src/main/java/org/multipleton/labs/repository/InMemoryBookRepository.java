@@ -22,10 +22,10 @@ public class InMemoryBookRepository implements BookRepository {
     }
 
     @Override
-    public Optional<Book> findBookByTitle(String title) {
+    public List<Book> findBookByTitle(String title) {
         return books.stream()
-                .filter(b -> b.getTitle().equals(title))
-                .findFirst();
+                .filter(b -> b.getTitle().contains(title))
+                .toList();
     }
 
     @Override
@@ -33,6 +33,11 @@ public class InMemoryBookRepository implements BookRepository {
         return books.stream()
                 .filter(b -> b.hasAnyTag(tags))
                 .toList();
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return books.stream().toList();
     }
 
     @Override

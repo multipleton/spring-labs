@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Admin</h1>
+<a th:href="@{/books}">All books</a>
+<h2>Add book</h2>
+<form action="#" th:action="@{/add-book}" th:object="${book}" method="post">
+    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>AuthorId: <input type="text" th:field="*{authorId}"/></p>
+    <p>Tags: <input type="text" th:field="*{tags}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+<h2>Delete book</h2>
+<form th:action="@{/delete-book}" method="post">
+    <label>
+        Book id
+        <input th:name="bookId" name="title"/>
+    </label>
+    <button type="submit">Send</button>
+</form>
+<h2>Update book</h2>
+<form th:action="@{/update-book}" method="get">
+    <label>
+        Book id
+        <input th:name="bookId" name="title"/>
+    </label>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

@@ -19,13 +19,21 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    public Book findBookById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found: " + id));
+    }
+
     public List<Book> findBooksByAuthor(String name) {
         return bookRepository.findBooksByAuthorName(name);
     }
 
-    public Book findBookByTitle(String title) {
-        return bookRepository.findBookByTitle(title)
-                .orElseThrow();
+    public List<Book> findBookByTitle(String title) {
+        return bookRepository.findBookByTitle(title);
     }
 
     public List<Book> findBooksByTags(List<String> tags) {
@@ -46,8 +54,11 @@ public class BookService {
     public void updateBook(BookDto dto) {
         var book = bookRepository.findById(dto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Book not found: " + dto.getId()));
+        var author = authorRepository.findById(dto.getAuthorId())
+                .orElseThrow(() -> new IllegalArgumentException("Author not found: " + dto.getAuthorId()));
         book.setTitle(dto.getTitle());
         book.setTags(dto.getTags());
+        book.setAuthor(author);
         bookRepository.save(book);
     }
 }

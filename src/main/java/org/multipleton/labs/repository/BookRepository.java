@@ -9,9 +9,11 @@ public interface BookRepository {
 
     List<Book> findBooksByAuthorName(String name);
 
-    Optional<Book> findBookByTitle(String title);
+    List<Book> findBookByTitle(String title);
 
     List<Book> findBooksByTags(List<String> tags);
+
+    List<Book> findAll();
 
     Optional<Book> findById(Long id);
 

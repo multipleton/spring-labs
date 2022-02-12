@@ -1,6 +1,9 @@
 package org.multipleton.labs.dto;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BookDto {
 
@@ -10,7 +13,7 @@ public class BookDto {
 
     private Long authorId;
 
-    private Set<String> tags;
+    private String tags;
 
     public String getTitle() {
         return title;
@@ -29,11 +32,18 @@ public class BookDto {
     }
 
     public Set<String> getTags() {
-        return tags;
+        if (tags == null) {
+            return new HashSet<>();
+        }
+        return Arrays.stream(tags.split(",")).collect(Collectors.toSet());
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public void setTags(Set<String> tags) {
-        this.tags = tags;
+        this.tags = String.join(",", tags);
     }
 
     public Long getId() {
