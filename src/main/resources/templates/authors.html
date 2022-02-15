@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Authors</h2>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <tr th:each="author: ${authors}">
+            <td th:utext="${author.id}"></td>
+            <td th:utext="${author.name}"></td>
+            <td>
+                <a th:href="@{/books(author=${author.name})}">Books</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

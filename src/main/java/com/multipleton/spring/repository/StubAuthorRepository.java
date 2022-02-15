@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public class StubAuthorRepository implements AuthorRepository {
     private final Set<Author> authors = new HashSet<>();
-    private Long index;
+    private Long index = 0L;
 
     @Override
     public List<Author> findAll() {
