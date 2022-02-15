@@ -4,15 +4,25 @@ import com.multipleton.spring.model.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class StubBookRepository implements BookRepository {
     private final Set<Book> books = new HashSet<>();
-    private Long index;
+    private Long index = 0L;
 
     @Override
     public List<Book> findAll() {
         return new ArrayList<>(books);
+    }
+
+    @Override
+    public List<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name) {
+        return books.stream()
+                .filter(book -> title == null || title.isEmpty() || book.getTitle().contains(title))
+                .filter(book -> tags.isEmpty() || book.getTags().containsAll(tags))
+                .filter(book -> name == null || name.isEmpty() || book.getAuthor().getName().contains(name))
+                .collect(Collectors.toList());
     }
 
     @Override

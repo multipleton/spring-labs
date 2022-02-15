@@ -2,6 +2,7 @@ package com.multipleton.spring.service;
 
 import com.multipleton.spring.dto.book.BookCreateDto;
 import com.multipleton.spring.dto.book.BookDto;
+import com.multipleton.spring.dto.book.BookSearchDto;
 import com.multipleton.spring.dto.book.BookUpdateDto;
 import com.multipleton.spring.model.Author;
 import com.multipleton.spring.model.Book;
@@ -50,6 +51,13 @@ public class BookService {
 
     public List<BookDto> findAllBooks() {
         return bookRepository.findAll()
+                .stream()
+                .map(BookDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<BookDto> searchBooks(BookSearchDto dto) {
+        return bookRepository.findAllByTitleAndTagsAndAuthor_Name(dto.getTitle(), dto.getTagsSet(), dto.getAuthor())
                 .stream()
                 .map(BookDto::from)
                 .collect(Collectors.toList());

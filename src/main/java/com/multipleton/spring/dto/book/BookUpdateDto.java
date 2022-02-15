@@ -23,7 +23,8 @@ public class BookUpdateDto {
 
     public void updateBook(Book book) {
         Set<String> tags = Arrays.stream(this.tags.split(","))
-                        .collect(Collectors.toSet());
+                .map(String::trim)
+                .collect(Collectors.toSet());
         book.setTags(tags);
     }
 }
