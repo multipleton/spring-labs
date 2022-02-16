@@ -17,6 +17,9 @@ public class BookCreateDto {
         this.tags = tags;
     }
 
+    public BookCreateDto() {
+    }
+
     public String getTitle() {
         return title;
     }

@@ -10,6 +10,7 @@
     </style>
 </head>
 <body>
+    <a th:href="@{/}">Go back</a>
     <h2>Books</h2>
     <form th:action="@{/books}" method="get">
         <input type="text" th:field="${bookSearchDto.title}" name="title" placeholder="Title...">

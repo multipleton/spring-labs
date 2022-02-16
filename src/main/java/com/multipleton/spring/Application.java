@@ -17,22 +17,22 @@ import java.util.Set;
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-	@Bean
-	CommandLineRunner stubRunner(AuthorRepository authorRepository, BookRepository bookRepository) {
-		return args -> {
-			List<Author> authors = new ArrayList<>();
-			authors.add(new Author(null, "Bob Dylan"));
-			authors.forEach(authorRepository::save);
-			List<Book> books = new ArrayList<>();
-			Set<String> tags = new HashSet<>();
-			tags.add("Horror");
-			books.add(new Book(null, "Doom", authors.get(0), tags));
-			books.forEach(bookRepository::save);
-		};
-	}
+    @Bean
+    CommandLineRunner stubRunner(AuthorRepository authorRepository, BookRepository bookRepository) {
+        return args -> {
+            List<Author> authors = new ArrayList<>();
+            authors.add(new Author(null, "Bob Dylan"));
+            authors.forEach(authorRepository::save);
+            List<Book> books = new ArrayList<>();
+            Set<String> tags = new HashSet<>();
+            tags.add("Horror");
+            books.add(new Book(null, "Doom", authors.get(0), tags));
+            books.forEach(bookRepository::save);
+        };
+    }
 
 }

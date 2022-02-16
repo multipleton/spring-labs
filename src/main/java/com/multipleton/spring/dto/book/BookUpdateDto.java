@@ -7,10 +7,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BookUpdateDto {
+    private String title;
     private String tags;
 
-    public BookUpdateDto(String tags) {
+    public BookUpdateDto(String title, String tags) {
+        this.title = title;
         this.tags = tags;
+    }
+
+    public BookUpdateDto() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTags() {
@@ -25,6 +38,7 @@ public class BookUpdateDto {
         Set<String> tags = Arrays.stream(this.tags.split(","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
+        book.setTitle(title);
         book.setTags(tags);
     }
 }
