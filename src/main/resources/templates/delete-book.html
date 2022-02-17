@@ -5,12 +5,12 @@
     <title>Delete book</title>
 </head>
 <body>
-    <a th:href="@{/books/admin}">Go back</a>
+    <a href="/books/admin">Go back</a>
     <p>Are you sure you want to delete this book? </p>
     <b>Id:</b> [[${book.id}]]<br>
     <b>Title:</b> [[${book.title}]]<br>
     <b>Author:</b> [[${book.author.name}]]<br>
-    <b>Tags:</b> [[${#strings.setJoin(book.tags, ',')}]]<br>
+    <b>Tags:</b> [[${#strings.setJoin(book.tags, ', ')}]]<br>
     <form th:action="@{/books/delete/} + ${book.id}" method="post" style="margin-top: 10px" >
         <input type="submit">
     </form>

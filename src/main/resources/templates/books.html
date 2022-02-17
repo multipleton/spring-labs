@@ -10,15 +10,15 @@
     </style>
 </head>
 <body>
-    <a th:href="@{/}">Go back</a>
+    <a href="/">Go back</a>
     <h2>Books</h2>
-    <form th:action="@{/books}" method="get">
-        <input type="text" th:field="${bookSearchDto.title}" name="title" placeholder="Title...">
-        <input type="text" th:field="${bookSearchDto.author}" name="author" placeholder="Author...">
-        <input type="text" th:field="${bookSearchDto.tags}" name="tags" placeholder="Tags...">
+    <form action="/books" th:object="${bookSearchDto}" method="get">
+        <input type="text" th:field="*{title}" placeholder="Title...">
+        <input type="text" th:field="*{author}" placeholder="Author...">
+        <input type="text" th:field="*{tags}" placeholder="Tags...">
         <input type="submit">
     </form>
-    <a th:href="@{/books}">Clear filters</a>
+    <a href="/books">Clear filters</a>
     <table style="margin-top: 20px">
         <tr>
             <th>Id</th>
@@ -30,7 +30,7 @@
             <td th:utext="${book.id}"></td>
             <td th:utext="${book.title}"></td>
             <td th:utext="${book.author.name}"></td>
-            <td th:utext="${#strings.setJoin(book.tags, ',')}"></td>
+            <td th:utext="${#strings.setJoin(book.tags, ', ')}"></td>
         </tr>
     </table>
 </body>
