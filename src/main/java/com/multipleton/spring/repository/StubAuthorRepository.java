@@ -27,16 +27,13 @@ public class StubAuthorRepository implements AuthorRepository {
         if (author.getId() == null) {
             author.setId(++index);
         }
-        authors.remove(author);
+        deleteById(author.getId());
         authors.add(author);
         return author;
     }
 
     @Override
     public void deleteById(Long id) {
-        authors.stream()
-                .filter(author -> author.getId().equals(id))
-                .findFirst()
-                .ifPresent(authors::remove);
+        authors.removeIf(author -> author.getId().equals(id));
     }
 }

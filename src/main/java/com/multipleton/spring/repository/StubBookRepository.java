@@ -37,16 +37,13 @@ public class StubBookRepository implements BookRepository {
         if (book.getId() == null) {
             book.setId(++index);
         }
-        books.remove(book);
+        deleteById(book.getId());
         books.add(book);
         return book;
     }
 
     @Override
     public void deleteById(Long id) {
-        books.stream()
-                .filter(book -> book.getId().equals(id))
-                .findFirst()
-                .ifPresent(books::remove);
+        books.removeIf(book -> book.getId().equals(id));
     }
 }
