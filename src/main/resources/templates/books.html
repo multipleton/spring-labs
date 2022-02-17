@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Go back</a>
+    <h2>Books</h2>
+    <form action="/books" th:object="${bookSearchDto}" method="get">
+        <input type="text" th:field="*{title}" placeholder="Title...">
+        <input type="text" th:field="*{author}" placeholder="Author...">
+        <input type="text" th:field="*{tags}" placeholder="Tags...">
+        <input type="submit">
+    </form>
+    <a href="/books">Clear filters</a>
+    <table style="margin-top: 20px">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Tags</th>
+        </tr>
+        <tr th:each="book: ${books}">
+            <td th:utext="${book.id}"></td>
+            <td th:utext="${book.title}"></td>
+            <td th:utext="${book.author.name}"></td>
+            <td th:utext="${#strings.setJoin(book.tags, ', ')}"></td>
+        </tr>
+    </table>
+</body>
+</html>
