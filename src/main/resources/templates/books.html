@@ -18,8 +18,9 @@
         <input type="text" th:field="*{tags}" placeholder="Tags...">
         <input type="submit">
     </form>
-    <a href="/books">Clear filters</a>
-    <table style="margin-top: 20px">
+    <a th:if="${bookSearchDto != null && !bookSearchDto.isEmpty()}" href="/books">Clear filters</a>
+    <p th:if="${books.isEmpty()}">Search query returned no results</p>
+    <table th:unless="${books.isEmpty()}" style="margin-top: 20px">
         <tr>
             <th>Id</th>
             <th>Title</th>

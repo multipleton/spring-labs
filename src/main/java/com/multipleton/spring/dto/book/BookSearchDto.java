@@ -49,4 +49,9 @@ public class BookSearchDto {
         this.tags = tags;
     }
 
+    public boolean isEmpty() {
+        return (title == null || title.isEmpty())
+                && (author == null || author.isEmpty())
+                && (tags == null || tags.isEmpty());
+    }
 }
