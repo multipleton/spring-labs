@@ -33,7 +33,11 @@
             <td th:utext="${book.title}"></td>
             <td th:utext="${book.author.name}"></td>
             <td th:utext="${#strings.setJoin(book.tags, ', ')}"></td>
-            <td th:utext="${book.status.title}"></td>
+            <th:block th:switch="${book.status}">
+                <td style="color: #00BFFF;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).ONLINE}" th:utext="${book.status.title}"></td>
+                <td style="color: #39bd9a;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).IN_STOCK}" th:utext="${book.status.title}"></td>
+                <td style="color: #FF4500;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).OUT_OF_STOCK}" th:utext="${book.status.title}"></td>
+            </th:block>
         </tr>
     </table>
 </body>
