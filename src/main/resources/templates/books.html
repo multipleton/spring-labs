@@ -26,12 +26,14 @@
             <th>Title</th>
             <th>Author</th>
             <th>Tags</th>
+            <th>Status</th>
         </tr>
         <tr th:each="book: ${books}">
             <td th:utext="${book.id}"></td>
             <td th:utext="${book.title}"></td>
             <td th:utext="${book.author.name}"></td>
             <td th:utext="${#strings.setJoin(book.tags, ', ')}"></td>
+            <td th:utext="${book.status.title}"></td>
         </tr>
     </table>
 </body>

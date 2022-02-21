@@ -10,12 +10,14 @@ public class BookDto {
     private String title;
     private AuthorDto author;
     private Set<String> tags;
+    private BookStatus status;
 
-    public BookDto(Long id, String title, AuthorDto author, Set<String> tags) {
+    public BookDto(Long id, String title, AuthorDto author, Set<String> tags, BookStatus status) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.tags = tags;
+        this.status = status;
     }
 
     public Long getId() {
@@ -50,7 +52,15 @@ public class BookDto {
         this.tags = tags;
     }
 
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
     public static BookDto from(Book book) {
-        return new BookDto(book.getId(), book.getTitle(), AuthorDto.from(book.getAuthor()), book.getTags());
+        return new BookDto(book.getId(), book.getTitle(), AuthorDto.from(book.getAuthor()), book.getTags(), book.getStatus());
     }
 }

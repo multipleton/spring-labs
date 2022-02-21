@@ -9,10 +9,12 @@ import java.util.stream.Collectors;
 public class BookUpdateDto {
     private String title;
     private String tags;
+    private BookStatus status;
 
-    public BookUpdateDto(String title, String tags) {
+    public BookUpdateDto(String title, String tags, BookStatus status) {
         this.title = title;
         this.tags = tags;
+        this.status = status;
     }
 
     public BookUpdateDto() {
@@ -34,11 +36,20 @@ public class BookUpdateDto {
         this.tags = tags;
     }
 
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
     public void updateBook(Book book) {
         Set<String> tags = Arrays.stream(this.tags.split(","))
                 .map(String::trim)
                 .collect(Collectors.toSet());
         book.setTitle(title);
         book.setTags(tags);
+        book.setStatus(status);
     }
 }

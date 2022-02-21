@@ -11,6 +11,7 @@
     <b>Title:</b> [[${book.title}]]<br>
     <b>Author:</b> [[${book.author.name}]]<br>
     <b>Tags:</b> [[${#strings.setJoin(book.tags, ', ')}]]<br>
+    <b>Status:</b> [[${book.status.title}]]<br>
     <form th:action="@{/books/delete/} + ${book.id}" method="post" style="margin-top: 10px" >
         <input type="submit">
     </form>
