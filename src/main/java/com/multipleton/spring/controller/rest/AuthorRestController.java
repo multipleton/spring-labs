@@ -33,12 +33,13 @@ public class AuthorRestController {
     }
 
     @PostMapping("/authors")
-    public AuthorDto createAuthor(AuthorCreateDto dto) {
+    public AuthorDto createAuthor(@RequestBody AuthorCreateDto dto) {
         return authorService.createAuthor(dto);
     }
 
     @PutMapping("/authors/{authorId}")
-    public AuthorDto updateAuthor(@PathVariable Long authorId, AuthorUpdateDto dto) {
+    public AuthorDto updateAuthor(@PathVariable Long authorId,
+                                  @RequestBody AuthorUpdateDto dto) {
         return authorService.updateAuthor(authorId, dto);
     }
 
