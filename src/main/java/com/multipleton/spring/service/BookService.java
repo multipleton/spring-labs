@@ -62,4 +62,12 @@ public class BookService {
                 .map(BookDto::from)
                 .collect(Collectors.toList());
     }
+
+    public List<BookDto> findBooksByAuthorId(Long authorId) {
+        return bookRepository.findAllByAuthor_Id(authorId)
+                .stream()
+                .map(BookDto::from)
+                .collect(Collectors.toList());
+    }
+
 }

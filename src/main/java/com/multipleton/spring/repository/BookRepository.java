@@ -12,6 +12,8 @@ public interface BookRepository {
 
     List<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name);
 
+    List<Book> findAllByAuthor_Id(Long authorId);
+
     Optional<Book> findById(Long id);
 
     Book save(Book book);

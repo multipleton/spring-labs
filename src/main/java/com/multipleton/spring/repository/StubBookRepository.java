@@ -26,6 +26,13 @@ public class StubBookRepository implements BookRepository {
     }
 
     @Override
+    public List<Book> findAllByAuthor_Id(Long authorId) {
+        return books.stream()
+                .filter(book -> book.getAuthor().getId().equals(authorId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Book> findById(Long id) {
         return books.stream()
                 .filter(book -> book.getId().equals(id))
