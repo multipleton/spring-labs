@@ -19,13 +19,8 @@ public class BookRestController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/books/search")
-    public List<BookDto> searchBooks(BookSearchDto dto) {
-        return bookService.searchBooks(dto);
-    }
-
     @GetMapping("/books/{bookId}")
-    public BookDto findBook(@PathVariable Long bookId) {
+    public BookDto getBook(@PathVariable Long bookId) {
         return bookService.getBook(bookId);
     }
 
@@ -43,6 +38,11 @@ public class BookRestController {
     @DeleteMapping("/books/{bookId}")
     public void deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
+    }
+
+    @GetMapping("/books/search")
+    public List<BookDto> searchBooks(BookSearchDto dto) {
+        return bookService.searchBooks(dto);
     }
 
 }
