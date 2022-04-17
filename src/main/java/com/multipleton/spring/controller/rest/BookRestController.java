@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest")
-public class BookRestController {
+public class BookRestController extends FrontRestController {
 
     private BookService bookService;
 

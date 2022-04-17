@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest")
-public class AuthorRestController {
+public class AuthorRestController extends FrontRestController {
 
     private final AuthorService authorService;
     private final BookService bookService;
