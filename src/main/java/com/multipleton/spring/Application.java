@@ -1,5 +1,6 @@
 package com.multipleton.spring;
 
+import com.multipleton.spring.dto.book.BookStatus;
 import com.multipleton.spring.model.Author;
 import com.multipleton.spring.model.Book;
 import com.multipleton.spring.repository.AuthorRepository;
@@ -7,15 +8,18 @@ import com.multipleton.spring.repository.BookRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
+@EnableWebSecurity
 public class Application {
 
     public static void main(String[] args) {
@@ -44,9 +48,9 @@ public class Application {
             tags3.add("Horror");
             tags3.add("Madness");
             tags3.add("Fantasy");
-            books.add(new Book(null, "The Shining", authors.get(0), tags1));
-            books.add(new Book(null, "Spark of Life", authors.get(1), tags2));
-            books.add(new Book(null, "The Call of Cthulhu", authors.get(2), tags3));
+            books.add(new Book(null, "The Shining", authors.get(0), tags1, BookStatus.IN_STOCK));
+            books.add(new Book(null, "Spark of Life", authors.get(1), tags2, BookStatus.OUT_OF_STOCK));
+            books.add(new Book(null, "The Call of Cthulhu", authors.get(2), tags3, BookStatus.ONLINE));
             books.forEach(bookRepository::save);
         };
     }

@@ -13,6 +13,9 @@
             <option th:each="author : ${authors}" th:value="${author.id}" th:utext="${author.name}"></option>
         </select><br>
         <input type="text" th:field="*{tags}" placeholder="Enter tags" required><br>
+        <select th:field="*{status}" required>
+            <option th:each="bookStatus : ${T(com.multipleton.spring.dto.book.BookStatus).values()}" th:value="${bookStatus}" th:text="${bookStatus.title}"></option>
+        </select><br>
         <input type="submit">
     </form>
 </body>

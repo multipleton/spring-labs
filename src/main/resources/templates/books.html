@@ -18,19 +18,26 @@
         <input type="text" th:field="*{tags}" placeholder="Tags...">
         <input type="submit">
     </form>
-    <a href="/books">Clear filters</a>
-    <table style="margin-top: 20px">
+    <a th:if="${bookSearchDto != null && !bookSearchDto.isEmpty()}" href="/books">Clear filters</a>
+    <p th:if="${books.isEmpty()}">Search query returned no results</p>
+    <table th:unless="${books.isEmpty()}" style="margin-top: 20px">
         <tr>
             <th>Id</th>
             <th>Title</th>
             <th>Author</th>
             <th>Tags</th>
+            <th>Status</th>
         </tr>
         <tr th:each="book: ${books}">
             <td th:utext="${book.id}"></td>
             <td th:utext="${book.title}"></td>
             <td th:utext="${book.author.name}"></td>
             <td th:utext="${#strings.setJoin(book.tags, ', ')}"></td>
+            <th:block th:switch="${book.status}">
+                <td style="color: #00BFFF;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).ONLINE}" th:utext="${book.status.title}"></td>
+                <td style="color: #39bd9a;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).IN_STOCK}" th:utext="${book.status.title}"></td>
+                <td style="color: #FF4500;" th:case="${T(com.multipleton.spring.dto.book.BookStatus).OUT_OF_STOCK}" th:utext="${book.status.title}"></td>
+            </th:block>
         </tr>
     </table>
 </body>

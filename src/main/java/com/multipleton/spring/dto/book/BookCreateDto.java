@@ -10,11 +10,13 @@ public class BookCreateDto {
     private String title;
     private Long authorId;
     private String tags;
+    private BookStatus status;
 
-    public BookCreateDto(String title, Long authorId, String tags) {
+    public BookCreateDto(String title, Long authorId, String tags, BookStatus status) {
         this.title = title;
         this.authorId = authorId;
         this.tags = tags;
+        this.status = status;
     }
 
     public BookCreateDto() {
@@ -44,7 +46,15 @@ public class BookCreateDto {
         this.tags = tags;
     }
 
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
     public Book toBook(Author author) {
-        return new Book(null, title, author, Arrays.stream(tags.split(",")).collect(Collectors.toSet()));
+        return new Book(null, title, author, Arrays.stream(tags.split(",")).collect(Collectors.toSet()), status);
     }
 }
