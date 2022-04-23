@@ -1,6 +1,8 @@
 package com.multipleton.spring.repository;
 
 import com.multipleton.spring.model.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +12,9 @@ public interface BookRepository {
 
     List<Book> findAll();
 
-    List<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name);
+    Page<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name, Pageable pageable);
+
+    List<Book> findAllByAuthor_Id(Long authorId);
 
     Optional<Book> findById(Long id);
 

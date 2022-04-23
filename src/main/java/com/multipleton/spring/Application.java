@@ -8,6 +8,7 @@ import com.multipleton.spring.repository.BookRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
@@ -18,7 +19,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        UserDetailsServiceAutoConfiguration.class,
+        DataSourceAutoConfiguration.class})
 @EnableWebSecurity
 public class Application {
 

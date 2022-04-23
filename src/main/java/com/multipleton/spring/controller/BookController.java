@@ -6,6 +6,7 @@ import com.multipleton.spring.dto.book.BookUpdateDto;
 import com.multipleton.spring.service.AuthorService;
 import com.multipleton.spring.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class BookController {
     @GetMapping
     public String books(BookSearchDto bookSearchDto, Model model) {
         model.addAttribute("bookSearchDto", bookSearchDto);
-        model.addAttribute("books", bookService.searchBooks(bookSearchDto));
+        model.addAttribute("books", bookService.searchBooks(bookSearchDto, Pageable.unpaged()));
         return "books";
     }
 

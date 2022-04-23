@@ -9,6 +9,9 @@ public class AuthorUpdateDto {
         this.name = name;
     }
 
+    public AuthorUpdateDto() {
+    }
+
     public String getName() {
         return name;
     }

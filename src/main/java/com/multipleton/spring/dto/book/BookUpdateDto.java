@@ -50,6 +50,8 @@ public class BookUpdateDto {
                 .collect(Collectors.toSet());
         book.setTitle(title);
         book.setTags(tags);
-        book.setStatus(status);
+        if (status != null) {
+            book.setStatus(status);
+        }
     }
 }
