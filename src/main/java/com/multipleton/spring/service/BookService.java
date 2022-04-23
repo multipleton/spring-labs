@@ -48,6 +48,7 @@ public class BookService {
     }
 
     public void deleteBook(Long id) {
+        findBook(id);
         bookRepository.deleteById(id);
     }
 

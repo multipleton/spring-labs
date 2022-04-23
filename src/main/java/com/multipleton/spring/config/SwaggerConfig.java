@@ -25,6 +25,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .build()
+                .useDefaultResponseMessages(false)
                 .apiInfo(new ApiInfoBuilder()
                         .title(TITLE)
                         .description(DESCRIPTION)

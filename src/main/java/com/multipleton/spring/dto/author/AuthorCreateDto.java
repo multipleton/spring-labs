@@ -9,6 +9,9 @@ public class AuthorCreateDto {
         this.name = name;
     }
 
+    public AuthorCreateDto() {
+    }
+
     public String getName() {
         return name;
     }

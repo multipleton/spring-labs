@@ -1,6 +1,7 @@
 package com.multipleton.spring.dto.book;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 public class BookSearchDto {
     private String title;
     private String author;
+    @ApiParam(value = "values should be separated by comma")
     private String tags;
 
     public BookSearchDto(String title, String author, String tags) {

@@ -27,9 +27,15 @@ public class StubBookRepository implements BookRepository {
                 .filter(book -> name == null || name.isEmpty() || book.getAuthor().getName().contains(name))
                 .sorted(Comparator.comparing(Book::getId))
                 .collect(Collectors.toList());
-        int start = Math.min(pageable.getPageNumber() * pageable.getPageSize(), entries.size());
-        int end = Math.min(start + pageable.getPageSize(), entries.size());
-        return new PageImpl<>(entries.subList(start, end), pageable, entries.size());
+        List<Book> result;
+        if (pageable.isPaged()) {
+            int start = Math.min(pageable.getPageNumber() * pageable.getPageSize(), entries.size());
+            int end = Math.min(start + pageable.getPageSize(), entries.size());
+            result = entries.subList(start, end);
+        } else {
+            result = entries;
+        }
+        return new PageImpl<>(result, pageable, entries.size());
     }
 
     @Override
