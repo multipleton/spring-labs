@@ -1,6 +1,9 @@
 package com.multipleton.spring.repository;
 
 import com.multipleton.spring.model.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -17,12 +20,16 @@ public class StubBookRepository implements BookRepository {
     }
 
     @Override
-    public List<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name) {
-        return books.stream()
+    public Page<Book> findAllByTitleAndTagsAndAuthor_Name(String title, Set<String> tags, String name, Pageable pageable) {
+        List<Book> entries = books.stream()
                 .filter(book -> title == null || title.isEmpty() || book.getTitle().contains(title))
                 .filter(book -> tags.isEmpty() || book.getTags().containsAll(tags))
                 .filter(book -> name == null || name.isEmpty() || book.getAuthor().getName().contains(name))
+                .sorted(Comparator.comparing(Book::getId))
                 .collect(Collectors.toList());
+        int start = Math.min(pageable.getPageNumber() * pageable.getPageSize(), entries.size());
+        int end = Math.min(start + pageable.getPageSize(), entries.size());
+        return new PageImpl<>(entries.subList(start, end), pageable, entries.size());
     }
 
     @Override

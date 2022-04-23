@@ -5,9 +5,9 @@ import com.multipleton.spring.dto.book.BookDto;
 import com.multipleton.spring.dto.book.BookSearchDto;
 import com.multipleton.spring.dto.book.BookUpdateDto;
 import com.multipleton.spring.service.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/rest")
@@ -41,8 +41,10 @@ public class BookRestController extends FrontRestController {
     }
 
     @GetMapping("/books/search")
-    public List<BookDto> searchBooks(BookSearchDto dto) {
-        return bookService.searchBooks(dto);
+    public Page<BookDto> searchBooks(BookSearchDto dto,
+                                     @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                     @RequestParam(value = "size", defaultValue = "20") Integer size) {
+        return bookService.searchBooks(dto, PageRequest.of(page, size));
     }
 
 }

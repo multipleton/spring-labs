@@ -8,6 +8,8 @@ import com.multipleton.spring.model.Author;
 import com.multipleton.spring.model.Book;
 import com.multipleton.spring.repository.BookRepository;
 import com.multipleton.spring.service.exception.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,11 +58,12 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public List<BookDto> searchBooks(BookSearchDto dto) {
-        return bookRepository.findAllByTitleAndTagsAndAuthor_Name(dto.getTitle(), dto.getTagsSet(), dto.getAuthor())
-                .stream()
-                .map(BookDto::from)
-                .collect(Collectors.toList());
+    public Page<BookDto> searchBooks(BookSearchDto dto, Pageable pageable) {
+        return bookRepository.findAllByTitleAndTagsAndAuthor_Name(dto.getTitle(),
+                        dto.getTagsSet(),
+                        dto.getAuthor(),
+                        pageable)
+                .map(BookDto::from);
     }
 
     public List<BookDto> findBooksByAuthorId(Long authorId) {

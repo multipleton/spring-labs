@@ -1,5 +1,7 @@
 package com.multipleton.spring.dto.book;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,6 +38,7 @@ public class BookSearchDto {
         return tags;
     }
 
+    @ApiModelProperty(hidden = true)
     public Set<String> getTagsSet() {
         if (tags == null || tags.isEmpty()) {
             return new HashSet<>();
